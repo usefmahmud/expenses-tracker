@@ -1,3 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root{
-  
+    --primary-bg-color: #ebecec;
+    --secondary-bg-color: #f5f7f7;
+    --primary-color: #659f76;
+    --secondary-color: #a4b0c6;
+    --text-color: #09100c;
+}
+
+.dark-mode{
+    --primary-bg-color: #000100;
+    --secondary-bg-color: #080b09;
+    --primary-color: #609a73;
+    --secondary-color: #39455b;
+    --text-color: #eff6f2;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.main{
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    
+    height: 100vh;
+    width: 100vw;
+    padding: 10px;
+
+    display: flex;
+    
+    .side{
+        width: 0px;
+        transition: .4s width ease-in-out;
+
+        &.side--opened{
+            width: 300px;
+        }
+    }
+
+    .container{
+        background-color: var(--secondary-bg-color);
+        width: 100%;
+        padding: 10px;
+
+        border-radius: 10px;
+    }
 }

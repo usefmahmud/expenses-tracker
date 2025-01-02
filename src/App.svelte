@@ -1,21 +1,28 @@
 <script lang="ts">
-  import { Router, Link, Route } from "svelte-routing"
+  import { Router, Route } from "svelte-routing"
   import Dashboard from "./routes/Dashboard.svelte"
   import Settings from "./routes/Settings.svelte"
+  import Navbar from "./lib/Navbar.svelte"
+  
+  import BurgerButton from "./components/BurgerButton.svelte";
 
-  let msg = 'Hello, World'
-  let isMsgShown = false
+  let isNavOpen: boolean = true
+  let openNav: () => void = () => {
+    isNavOpen = !isNavOpen
+  }
 
 </script>
 
 <Router>
-  <button onclick={() => isMsgShown = !isMsgShown}>
-    { isMsgShown ? 'Hide' : 'Show' }
-  </button>
-  <h1>
-    { isMsgShown ? msg : '' }
-  </h1>
+  <div class="main dark-mode">
+    <div class="side {isNavOpen ? 'side--opened' : ''}">
+        <Navbar />
+    </div>
+    <div class="container">
+      <BurgerButton isOpen={isNavOpen} onClick={openNav}/>
 
-  <Route path="/" component={Dashboard} />
-  <Route path="/settings" component={Settings} />
+      <Route path="/" component={Dashboard} />
+      <Route path="/settings" component={Settings} />
+    </div>
+  </div>
 </Router>
