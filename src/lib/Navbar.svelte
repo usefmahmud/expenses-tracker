@@ -1,15 +1,53 @@
 <script lang="ts">
-    import { link, links, Router } from "svelte-routing"
+    import { link, links, Router, useLocation } from "svelte-routing"
+    import { type NavRouteType } from '../utils/types'
+
+    import avatar from '../assets/avatars/avatar-1.svg'
+
+    const location = useLocation()
+
+    const NavRoutes: NavRouteType[] = [
+        {
+            name: 'Dashboard',
+            path: '/',
+            icon: {
+                active: 'material-symbols-light:space-dashboard',
+                inactive: 'material-symbols-light:space-dashboard-outline'
+            }
+        },
+        {
+            name: 'Settings',
+            path: '/settings',
+            icon: {
+                active: 'material-symbols-light:settings',
+                inactive: 'material-symbols-light:space-dashboard-outline'
+            }
+        }
+    ]
 </script>
 
 <nav>
-    <div class="logo">
-        <a href="/" use:link>FINACIAL <br> TRACKER</a>
+    <div class="user-info">
+        <div class="user-info__avatar">
+            <img src={avatar} alt="user avatar">
+        </div>
+        <div class="user-info__name">
+            Yousef Mahmoud
+        </div>
     </div>
+
     <div class="links" use:links>
-        <Router>
-            <a href="/">Dashboard</a>
-            <a href="/settings">Settings</a>
+        <Router>            
+            {#each NavRoutes as NavRoute}
+                <a 
+                    href={NavRoute.path} 
+                    class="link" 
+                    class:link--active={$location.pathname === NavRoute.path}
+                >
+                    <span>{NavRoute.name}</span>
+                </a>
+            {/each}
+            
         </Router>
     </div>
 </nav>
@@ -19,14 +57,71 @@
     nav{
         display: flex;
         flex-direction: column;
-        .logo{
-            a{
-                font-size: 1.5rem;
-                font-weight: bold;
-                color: #333;
+        height: 100%;
+
+        padding: 10px 20px;
+        
+        .user-info{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            margin-bottom: 30px;
+
+            .user-info__avatar{
+                width: 80px;
+                height: 80px;
+                margin-bottom: 10px;
+
+                border-radius: 50%;
+                overflow: hidden;
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .user-info__name{
+                color: #ffffff99;
+                font-weight: bolder;
+                font-size: 16px;
+            }
+
+        }
+
+        .links{
+            display: flex;
+            flex-direction: column;
+
+            .link{
+                display: flex;
+                padding: 10px 20px;
+
+                font-size: 14px;
                 text-decoration: none;
+                user-select: none;
+
+                color: #ffffff99;
+                
+                &.link--active {
+                    padding-left: 23px;
+
+                    color: #00dac4b8;
+                    background-color: #28282a;
+
+                    border: 1px solid #383838;
+                    border-radius: 5px;
+
+                    font-weight: bold;
+                }
+
+                &:not(:last-child){
+                    margin-bottom: 5px;
+                }   
             }
         }
     }
 </style>
 
+<!-- TODO: dynamic name and icon based on users settings -->

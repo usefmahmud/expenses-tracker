@@ -9,8 +9,8 @@
 }
 
 .dark-mode{
-    --primary-bg-color: #000100;
-    --secondary-bg-color: #080b09;
+    --primary-bg-color: #1B1B1B;
+    --secondary-bg-color: #0B0B0B;
     --primary-color: #609a73;
     --secondary-color: #39455b;
     --text-color: #eff6f2;
@@ -29,24 +29,18 @@
     
     height: 100vh;
     width: 100vw;
-    padding: 10px;
+
+    padding: 30px 25px 30px 5px;
 
     display: flex;
     
     .side{
-        width: 0px;
-        transition: .4s width ease-in-out;
-
-        &.side--opened{
-            width: 300px;
-        }
+        width: 330px;
     }
 
     .container{
         background-color: var(--secondary-bg-color);
         width: 100%;
         padding: 10px;
-
-        border-radius: 10px;
     }
 }

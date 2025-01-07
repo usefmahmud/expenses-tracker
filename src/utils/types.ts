@@ -14,3 +14,13 @@ interface Category {
   icon: string,
 }
 
+interface NavRouteType {
+  name: string,
+  path: string,
+  icon: {
+    active: string, 
+    inactive: string
+  }
+}
+
+export type { Expense, Category, NavRouteType }

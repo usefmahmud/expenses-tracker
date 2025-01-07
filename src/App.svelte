@@ -3,24 +3,15 @@
   import Dashboard from "./routes/Dashboard.svelte"
   import Settings from "./routes/Settings.svelte"
   import Navbar from "./lib/Navbar.svelte"
-  
-  import BurgerButton from "./components/BurgerButton.svelte";
-
-  let isNavOpen: boolean = true
-  let openNav: () => void = () => {
-    isNavOpen = !isNavOpen
-  }
 
 </script>
 
 <Router>
   <div class="main dark-mode">
-    <div class="side {isNavOpen ? 'side--opened' : ''}">
+    <aside class="side">
         <Navbar />
-    </div>
+    </aside>
     <div class="container">
-      <BurgerButton isOpen={isNavOpen} onClick={openNav}/>
-
       <Route path="/" component={Dashboard} />
       <Route path="/settings" component={Settings} />
     </div>
