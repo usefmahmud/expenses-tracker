@@ -22,26 +22,3 @@
     margin: 0;
     box-sizing: border-box;
 }
-
-.main{
-    background-color: var(--primary-bg-color);
-    color: var(--text-color);
-    font-family: 'Inter', sans-serif;
-    
-    height: 100vh;
-    width: 100vw;
-
-    padding: 30px 25px 30px 5px;
-
-    display: flex;
-    
-    .side{
-        width: 330px;
-    }
-
-    .container{
-        background-color: var(--secondary-bg-color);
-        width: 100%;
-        padding: 10px;
-    }
-}
