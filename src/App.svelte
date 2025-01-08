@@ -4,6 +4,8 @@
   import Settings from "./routes/Settings.svelte"
   import Navbar from "./lib/Navbar.svelte"
 
+  import 'boxicons/css/boxicons.min.css'
+  
 </script>
 
 <Router>

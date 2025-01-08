@@ -17,10 +17,7 @@ interface Category {
 interface NavRouteType {
   name: string,
   path: string,
-  icon: {
-    active: string, 
-    inactive: string
-  }
+  icon: string
 }
 
 export type { Expense, Category, NavRouteType }

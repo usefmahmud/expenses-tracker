@@ -3,6 +3,7 @@
     import { type NavRouteType } from '../utils/types'
 
     import avatar from '../assets/avatars/avatar-1.svg'
+    import Icon from "../components/Icon.svelte";
 
     const location = useLocation()
 
@@ -10,18 +11,12 @@
         {
             name: 'Dashboard',
             path: '/',
-            icon: {
-                active: 'material-symbols-light:space-dashboard',
-                inactive: 'material-symbols-light:space-dashboard-outline'
-            }
+            icon: 'bx bxs-dashboard'
         },
         {
             name: 'Settings',
             path: '/settings',
-            icon: {
-                active: 'material-symbols-light:settings',
-                inactive: 'material-symbols-light:space-dashboard-outline'
-            }
+            icon: 'bx bxs-cog'
         }
     ]
 </script>
@@ -44,6 +39,11 @@
                     class="link" 
                     class:link--active={$location.pathname === NavRoute.path}
                 >
+                    <Icon 
+                        icon={NavRoute.icon} 
+                        color='none'
+                        size={18}
+                    />
                     <span>{NavRoute.name}</span>
                 </a>
             {/each}
@@ -96,6 +96,7 @@
 
             .link{
                 display: flex;
+                align-items: center;
                 padding: 10px 20px;
 
                 font-size: 14px;
@@ -105,7 +106,7 @@
                 color: #ffffff99;
                 
                 &.link--active {
-                    padding-left: 23px;
+                    padding-left: 19px;
 
                     color: #00dac4b8;
                     background-color: #28282a;
