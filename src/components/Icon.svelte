@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let icon: string, color: string, size: number
+  export let icon: string, color: string = 'none', size: number
 </script>
 
 <span>

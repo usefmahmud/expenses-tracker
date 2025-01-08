@@ -41,7 +41,6 @@
                 >
                     <Icon 
                         icon={NavRoute.icon} 
-                        color='none'
                         size={18}
                     />
                     <span>{NavRoute.name}</span>
