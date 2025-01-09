@@ -82,7 +82,7 @@
             }
 
             .user-info__name{
-                color: #ffffff99;
+                color: var(--text-color);
                 font-weight: bolder;
                 font-size: 16px;
             }
@@ -102,12 +102,12 @@
                 text-decoration: none;
                 user-select: none;
 
-                color: #ffffff99;
+                color: var(--text-color);
                 
                 &.link--active {
                     padding-left: 19px;
 
-                    color: #00dac4b8;
+                    color: var(--primary-color);
                     background-color: #28282a;
 
                     border: 1px solid #383838;

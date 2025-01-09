@@ -3,19 +3,29 @@
   import Dashboard from "./routes/Dashboard.svelte"
   import Settings from "./routes/Settings.svelte"
   import Navbar from "./lib/Navbar.svelte"
+  import Header from "./lib/Header.svelte";
 
   import 'boxicons/css/boxicons.min.css'
-  import Header from "./lib/Header.svelte";
-  
+  import { storage } from "./store/storageManager";
+  import type { Data } from "./utils/types";
+
+  let appData: Data | null = null
+  const store = storage.store
+  $: appData = $store
+
+  $: console.log(appData)
 </script>
 
 <Router>
-  <div class="main dark-mode">
+  <div class="main {appData.theme === 'dark' ? 'dark-mode' : ''}">
     <aside class="side">
-        <Navbar />
+      <Navbar />
     </aside>
     <div class="container">
-      <Header />
+      <Header 
+        theme={appData.theme}
+        toggleTheme={storage.toggleTheme}
+      />
       <main>
         <Route path="/" component={Dashboard} />
         <Route path="/settings" component={Settings} />
@@ -50,6 +60,11 @@
 
       display: flex;
       flex-direction: column;
+
+      main{
+        height: 100%;
+        overflow: hidden;
+      }
     }
   }
 </style>
