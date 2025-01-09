@@ -104,11 +104,13 @@
     height: 100%;
 
     .dashboard__content{
+      height: 100%;
       .content__actions{
         display: flex;
         justify-content: space-between;
         justify-self: center;
         padding: 10px;
+        margin-bottom: 30px;
 
         background-color: var(--primary-bg-color);
 
@@ -200,6 +202,12 @@
             }
           }
         }
+      }
+
+      .content__tab{
+        height: 100%;
+        display: flex;
+        justify-content: center;
       }
     }
   }

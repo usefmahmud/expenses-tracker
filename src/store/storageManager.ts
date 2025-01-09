@@ -1,6 +1,7 @@
 import { writable } from "svelte/store";
 import type { Writable } from "svelte/store";
 import type { Data } from "../utils/types";
+import { defaultCategorys } from '../utils/db'
 
 const KEY = 'expense-tracker-data'
 const default_data: Data = {
@@ -13,7 +14,7 @@ const default_data: Data = {
     total_incomes: 0,
     actions: []
   },
-  categories: [],
+  categories: defaultCategorys,
   theme: 'dark'
 }
 
@@ -21,6 +22,10 @@ class Storage {
   store: Writable<Data>;
 
   constructor(){
+    // CLEAR STORAGE EACH TIME
+    // AFTER DEV STAGE WILL SET A FUNCTION TO AUTO GET OLD DATA
+    localStorage.clear()
+
     localStorage.setItem(KEY, JSON.stringify(this.getData()))
     this.store = writable(this.getData())
   }

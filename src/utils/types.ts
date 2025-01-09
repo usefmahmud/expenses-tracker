@@ -18,10 +18,18 @@ interface Income extends BaseAction {
 
 type Action = Expense | Income;
 
+interface CategoryColor {
+  colorName: string
+  iconColor: string,
+  iconBgColor: string,
+  textColor: string,
+  hoverBgColor: string
+}
+
 interface Category {
   id: number,
   name: string,
-  color: string,
+  color: CategoryColor,
   icon: string,
 }
 
@@ -47,4 +55,4 @@ interface NavRouteType {
   icon: string
 }
 
-export type { Action, Category, NavRouteType, Data, Actions}
+export type { Action, Category, NavRouteType, Data, Actions, CategoryColor}
