@@ -7,6 +7,11 @@
     --primary-color: #00dac4b8;
     --secondary-color: #a4b0c6;
     --text-color: #09100c;
+
+    --active-bg-color:  #0000000e;
+    --hover-color: #00000009;
+    --active-hover-color: #00000015;
+    --active-click-color: #00000021;
 }
 
 .dark-mode{
@@ -15,10 +20,16 @@
     --primary-color: #00dac4b8;
     --secondary-color: #39455b;
     --text-color: #ffffff99;
+
+    --active-bg-color:  #ffffff0e;
+    --hover-color: #ffffff09;
+    --active-hover-color: #ffffff15;
+    --active-click-color: #ffffff1f;
 }
 
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    transition: background-color .1s;
 }

@@ -2,12 +2,17 @@
   import Icon from "../components/Icon.svelte"
   import IncomesTab from "../lib/IncomesTab.svelte"
   import ExpensesTab from "../lib/ExpensesTab.svelte"
-  let activeTab: 'expenses' | 'incomes' = 'expenses'
+  import { storage } from "../store/storageManager";
+  import type { Actions } from "../utils/types";
 
+  let activeTab: 'expenses' | 'incomes' = 'expenses'
   const setTab = (tab: 'expenses' | 'incomes') => {
     activeTab = tab
   }
 
+  let actions: Actions | null = null
+  const store = storage.store
+  $: actions = $store.actions
 </script>
 
 <div class="dashboard">
@@ -27,11 +32,23 @@
             <Icon 
               icon='bx bx-credit-card'
               size={18}
-              color='#f11f99'
+              color='#bd1778'
             />
           </div>
-          <div class="card__title">
-            Expenses
+          <div class="card__details">
+            <div class="card__title">
+              Expenses
+            </div>
+            <div class="card__value" style="color: #762353;">
+              <span>$</span>
+              <span>
+                {
+                  actions.total_expenses === 0 ?
+                  `${actions.total_expenses}.00` :
+                  actions.total_expenses
+                }
+              </span>
+            </div>
           </div>
         </div>
       </button>
@@ -48,11 +65,23 @@
             <Icon 
               icon='bx bx-dollar'
               size={18}
-              color='#00dac6'
+              color='#06b0a1'
             />
           </div>
-          <div class="card__title">
-            Incomes
+          <div class="card__details">
+            <div class="card__title">
+              Incomes
+            </div>
+            <div class="card__value" style="color: #195d5b;">
+              <span>$</span>
+              <span>
+                {
+                  actions.total_incomes === 0 ?
+                  `${actions.total_incomes}.00` :
+                  actions.total_incomes
+                }
+              </span>
+            </div>
           </div>
         </div>
       </button>
@@ -89,7 +118,7 @@
 
         .actions__card{
           flex: 1;
-          background-color: transparent;
+          background: none;
           border: none;
           
           user-select: none;
@@ -106,10 +135,16 @@
           }
 
           &.actions__card--active .card__content{
-            background-color: rgba($color: #fff, $alpha: .07);
+            // background-color: rgba($color: #fff, $alpha: .07);
+            background-color: var(--active-bg-color);
 
             &:hover{
-              background-color: rgba($color: #fff, $alpha: .1);
+              background-color: var(--active-hover-color);
+            }
+
+            &:active{
+              background-color: var(--active-click-color);
+              scale: .99;
             }
           }
 
@@ -117,30 +152,21 @@
             border-radius: 10px;
 
             display: flex;
-            justify-content: center;
             align-items: center;
 
-            padding: 25px 15px;
+            padding: 25px 30px;
 
             transition: background-color .2s, scale .2s;
 
             &:hover{
-              background-color: rgba($color: #fff, $alpha: .025);
+              background-color: var(--hover-color);
             }
 
             &:active{
-              background-color: rgba($color: #fff, $alpha: .12);
+              background-color: var(--active-click-color);
               scale: .99;
             }
 
-            .card__title{
-              color: var(--text-color);
-              font-weight: bold;
-              font-size: 16px;
-
-              display: flex;
-              justify-content: center;
-            }
 
             .card__icon{
               display: flex;
@@ -155,6 +181,22 @@
 
               min-height: 50px;
               min-width: 50px;
+            }
+
+            .card__details{
+              color: var(--text-color);
+
+              .card__title{
+                font-weight: bold;
+                font-size: 18px;
+                transform: translateY(-10px);
+                display: none;
+              }
+
+              .card__value{
+                font-size: 32px;
+                font-weight: 700;
+              }
             }
           }
         }

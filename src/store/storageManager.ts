@@ -8,7 +8,11 @@ const default_data: Data = {
     name: 'Default User',
     avatar: 'avatar-1.svg'
   },
-  actions: [],
+  actions: {
+    total_expenses: 0,
+    total_incomes: 0,
+    actions: []
+  },
   categories: [],
   theme: 'dark'
 }

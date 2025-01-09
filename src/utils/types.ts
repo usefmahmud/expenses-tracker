@@ -25,13 +25,19 @@ interface Category {
   icon: string,
 }
 
+interface Actions {
+  total_incomes: number,
+  total_expenses: number,
+  actions: Action[]
+}
+
 interface Data {
   personal_info: {
     name: string,
     avatar: string
   },
   theme: 'light' | 'dark',
-  actions: Action[],
+  actions: Actions,
   categories: Category[]
 }
 
@@ -41,4 +47,4 @@ interface NavRouteType {
   icon: string
 }
 
-export type { Action, Category, NavRouteType, Data }
+export type { Action, Category, NavRouteType, Data, Actions}
