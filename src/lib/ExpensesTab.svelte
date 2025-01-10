@@ -1,50 +1,66 @@
 <script lang="ts">
   import Icon from "../components/Icon.svelte"
+  import Modal from "../components/Modal.svelte";
   import { storage } from "../store/storageManager";
+  import { expensesByCategory } from "../utils/helpers";
   import type { Data } from "../utils/types";
+  import AddCategory from "./AddCategory.svelte";
 
   let data: Data | null = null
+  let groupedExpenses = []
   const store = storage.store
   $: data = $store
+  $: groupedExpenses = expensesByCategory(data.actions.actions.filter(action => action.type === 'expense'), data.categories)
 
+  let isAddCategoryOpen: boolean = false
+  const handleCloseCategoryModal = () => {
+    isAddCategoryOpen = false
+  }
+  const handleOpenCategoryModal = () => {
+    isAddCategoryOpen = true
+  }
 </script>
 
 <div class="expenses-tab">
   <div class="expenses__cateogires">
 
-    {#each data.categories as cateogry }
+    {#each data.categories as category }
 
       <div class="category__card">
         <div 
           class="category__content"
           role="button"
           tabindex="0"
-          onmouseover={e => e.currentTarget.style.backgroundColor = cateogry.color.hoverBgColor }
-          onfocus={e => e.currentTarget.style.backgroundColor = cateogry.color.hoverBgColor }
+          onmouseover={e => e.currentTarget.style.backgroundColor = category.color.hoverBgColor }
+          onfocus={e => e.currentTarget.style.backgroundColor = category.color.hoverBgColor }
         
           onmouseout={e => e.currentTarget.style.backgroundColor = '' }
           onblur={e => e.currentTarget.style.backgroundColor = '' }
         >
           <div 
             class="category__icon" 
-            style="background-color: {cateogry.color.iconBgColor};"
+            style="background-color: {category.color.iconBgColor};"
           >
             <Icon 
-              icon={cateogry.icon}
+              icon={category.icon}
               size={23}
-              color={cateogry.color.iconColor}
+              color={category.color.iconColor}
             />
           </div>
           <div class="category__details">
             <div class="category__title">
-              {cateogry.name}
+              {category.name}
             </div>
             <div 
               class="category__expense" 
-              style="color: {cateogry.color.textColor};"
+              style="color: {category.color.textColor};"
             >
               <span>$</span>
-              250,200
+              {
+                groupedExpenses
+                  .find(c => c.id === category.id)
+                  ?.expenses.reduce((prev, curr) => prev + curr.amount, 0)
+              }
             </div>
           </div>
         </div>
@@ -53,7 +69,20 @@
     {/each}
 
     <div class="category__card">
-      <div class="category__content">
+      <div 
+        class="category__content"
+        role="button"
+        tabindex="0"
+
+        onclick={e => {
+          handleOpenCategoryModal()
+        }}
+        onkeydown={e => { 
+          if(e.key === 'Enter' || e.key === ' '){
+            handleOpenCategoryModal()
+          }
+        }}
+      >
         <div class="category__icon">
           <Icon 
             icon='bx bx-plus'
@@ -69,6 +98,16 @@
     </div>
   </div>
 </div>
+
+{#if isAddCategoryOpen}
+  <Modal 
+    title='ADD CATEGORY'
+    {handleCloseCategoryModal}
+  >
+    <AddCategory />
+  </Modal>
+{/if}
+
 
 <style lang="scss">
   .expenses-tab{

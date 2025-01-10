@@ -12,7 +12,33 @@ const default_data: Data = {
   actions: {
     total_expenses: 0,
     total_incomes: 0,
-    actions: []
+    actions: [
+      {
+        id: 1,
+        type: 'expense',
+        amount: 120,
+        description: '234243',
+        category: 1,
+        date: new Date(),
+        title: 'Hello'
+      },{
+        id: 2,
+        type: 'expense',
+        amount: 100,
+        description: '234243',
+        category: 1,
+        date: new Date(),
+        title: 'Hello'
+      },{
+        id: 2,
+        type: 'expense',
+        amount: 250,
+        description: '234243',
+        category: 2,
+        date: new Date(),
+        title: 'Hello'
+      }
+    ]
   },
   categories: defaultCategorys,
   theme: 'dark'

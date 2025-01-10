@@ -1,3 +1,5 @@
+import type { Category, Expense } from "./types"
+
 export const getGreeting: () => string = () => {
   const hour = new Date().getHours()
 
@@ -10,4 +12,13 @@ export const getGreeting: () => string = () => {
   }else{
     return 'Good Night'
   }
+}
+
+export const expensesByCategory = (expenses: Expense[], categories: Category[], groupby: Category['id'] | null = null) => {
+  return categories.map(category => {
+    return {
+      ...category,
+      expenses: expenses.filter(expense => expense.category === category.id)
+    }
+  })
 }

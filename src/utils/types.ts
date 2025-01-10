@@ -55,4 +55,4 @@ interface NavRouteType {
   icon: string
 }
 
-export type { Action, Category, NavRouteType, Data, Actions, CategoryColor}
+export type { Expense, Income, Action, Category, NavRouteType, Data, Actions, CategoryColor}

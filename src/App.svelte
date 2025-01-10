@@ -42,6 +42,7 @@
     
     height: 100vh;
     width: 100vw;
+    position: relative;
 
     padding: 30px 25px 30px 5px;
 

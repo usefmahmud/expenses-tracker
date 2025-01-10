@@ -1,6 +1,6 @@
 import type { Category, CategoryColor } from "./types"
 
-const categoryColors: CategoryColor[] = [
+export const defaultCategoryColors: CategoryColor[] = [
   {
     iconColor: "#8B5CF6",
     iconBgColor: "#312E81",
@@ -79,31 +79,46 @@ export const defaultCategorys: Category[] = [
     id: 1,
     name: "Food",
     icon: "bx bx-baguette",
-    color: categoryColors[0]
+    color: defaultCategoryColors[0]
   },
   {
     id: 2,
     name: "Transport",
     icon: "bx bx-bus",
-    color: categoryColors[1]
+    color: defaultCategoryColors[1]
   },
   {
     id: 3,
     name: "Entertainment",
     icon: "bx bx-film",
-    color: categoryColors[2]
+    color: defaultCategoryColors[2]
   },
   {
     id: 4,
     name: "Health",
     icon: "bx bx-plus-medical",
-    color: categoryColors[3]
+    color: defaultCategoryColors[3]
   },
   {
     id: 5,
     name: "Education",
     icon: "bx bxs-school",
-    color: categoryColors[4]
+    color: defaultCategoryColors[4]
   }
 ]
 
+export const defaultCateoryIcons = [
+  { category: "Finance", icons: ["dollar-circle", "wallet", "credit-card"] },
+  { category: "Shopping", icons: ["cart-alt", "gift", "shopping-bag"] },
+  { category: "Food and Dining", icons: ["bowl-hot", "coffee-togo", "restaurant"] },
+  { category: "Transportation", icons: ["car", "bus", "train"] },
+  { category: "Health and Fitness", icons: ["trophy", "dumbbell", "dna"] },
+  { category: "Entertainment", icons: ["game", "music", "movie"] },
+  { category: "Utilities", icons: ["bulb", "cloud-lightning"] },
+  { category: "Communication", icons: ["phone-call", "message", "headphone"] },
+  { category: "Security", icons: ["lock"] },
+  { category: "Time and Organization", icons: ["timer", "calendar-event", "calendar-check"] },
+  { category: "Travel", icons: ["rocket", "globe"] },
+  { category: "Goals and Reminders", icons: ["bell-plus", "target-lock"] },
+  { category: "Miscellaneous", icons: ["star", "heart-circle", "chip"] }
+]
