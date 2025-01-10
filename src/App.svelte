@@ -4,6 +4,7 @@
   import Settings from "./routes/Settings.svelte"
   import Navbar from "./lib/Navbar.svelte"
   import Header from "./lib/Header.svelte";
+  import {Toaster} from 'svelte-french-toast'
 
   import 'boxicons/css/boxicons.min.css'
   import { storage } from "./store/storageManager";
@@ -23,14 +24,16 @@
     </aside>
     <div class="container">
       <Header 
-        theme={appData.theme}
-        toggleTheme={storage.toggleTheme}
+      theme={appData.theme}
+      toggleTheme={storage.toggleTheme}
       />
       <main>
         <Route path="/" component={Dashboard} />
         <Route path="/settings" component={Settings} />
       </main>
     </div>
+
+    <Toaster />
   </div>
 </Router>
 

@@ -20,6 +20,7 @@
   "dependencies": {
     "boxicons": "^2.1.4",
     "sass-embedded": "^1.83.0",
+    "svelte-french-toast": "^1.2.0",
     "svelte-routing": "^2.13.0"
   }
 }

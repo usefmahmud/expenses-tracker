@@ -74,7 +74,7 @@ export const defaultCategoryColors: CategoryColor[] = [
 ]
 
 
-export const defaultCategorys: Category[] = [
+export const defaultCategories: Category[] = [
   {
     id: 1,
     name: "Food",
@@ -107,18 +107,18 @@ export const defaultCategorys: Category[] = [
   }
 ]
 
-export const defaultCateoryIcons = [
-  { category: "Finance", icons: ["dollar-circle", "wallet", "credit-card"] },
-  { category: "Shopping", icons: ["cart-alt", "gift", "shopping-bag"] },
-  { category: "Food and Dining", icons: ["bowl-hot", "coffee-togo", "restaurant"] },
-  { category: "Transportation", icons: ["car", "bus", "train"] },
-  { category: "Health and Fitness", icons: ["trophy", "dumbbell", "dna"] },
-  { category: "Entertainment", icons: ["game", "music", "movie"] },
-  { category: "Utilities", icons: ["bulb", "cloud-lightning"] },
-  { category: "Communication", icons: ["phone-call", "message", "headphone"] },
-  { category: "Security", icons: ["lock"] },
-  { category: "Time and Organization", icons: ["timer", "calendar-event", "calendar-check"] },
-  { category: "Travel", icons: ["rocket", "globe"] },
-  { category: "Goals and Reminders", icons: ["bell-plus", "target-lock"] },
-  { category: "Miscellaneous", icons: ["star", "heart-circle", "chip"] }
+export const defaultCategoryIcons = [
+  "dollar-circle", "wallet", "credit-card",
+  "cart-alt", "gift", "shopping-bag",
+  "bowl-hot", "coffee-togo", "restaurant",
+  "car", "bus", "train",
+  "trophy", "dumbbell", "dna",
+  "game", "music", "movie",
+  "bulb", "cloud-lightning",
+  "phone-call", "message", "headphone",
+  "lock",
+  "timer", "calendar-event", "calendar-check",
+  "rocket", "globe",
+  "bell-plus", "target-lock",
+  "star", "heart-circle", "chip"
 ]

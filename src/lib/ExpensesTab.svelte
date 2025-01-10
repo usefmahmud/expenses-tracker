@@ -42,7 +42,7 @@
             style="background-color: {category.color.iconBgColor};"
           >
             <Icon 
-              icon={category.icon}
+              icon='bx bx-{category.icon}'
               size={23}
               color={category.color.iconColor}
             />
@@ -104,7 +104,9 @@
     title='ADD CATEGORY'
     {handleCloseCategoryModal}
   >
-    <AddCategory />
+    <AddCategory 
+      {handleCloseCategoryModal}
+    />
   </Modal>
 {/if}
 

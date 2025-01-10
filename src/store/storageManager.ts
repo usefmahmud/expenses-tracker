@@ -1,7 +1,7 @@
 import { writable } from "svelte/store";
 import type { Writable } from "svelte/store";
-import type { Data } from "../utils/types";
-import { defaultCategorys } from '../utils/db'
+import type { Category, Data } from "../utils/types";
+import { defaultCategories } from '../utils/db'
 
 const KEY = 'expense-tracker-data'
 const default_data: Data = {
@@ -12,35 +12,9 @@ const default_data: Data = {
   actions: {
     total_expenses: 0,
     total_incomes: 0,
-    actions: [
-      {
-        id: 1,
-        type: 'expense',
-        amount: 120,
-        description: '234243',
-        category: 1,
-        date: new Date(),
-        title: 'Hello'
-      },{
-        id: 2,
-        type: 'expense',
-        amount: 100,
-        description: '234243',
-        category: 1,
-        date: new Date(),
-        title: 'Hello'
-      },{
-        id: 2,
-        type: 'expense',
-        amount: 250,
-        description: '234243',
-        category: 2,
-        date: new Date(),
-        title: 'Hello'
-      }
-    ]
+    actions: []
   },
-  categories: defaultCategorys,
+  categories: defaultCategories,
   theme: 'dark'
 }
 
@@ -72,6 +46,17 @@ class Storage {
     localStorage.setItem(KEY, JSON.stringify(data))
 
     this.store.set(data)
+  }
+
+  // Category
+  addCategory = (category: Omit<Category, 'id'>) => {
+    const id = Date.now()
+    const newData = this.getData()
+    
+    newData.categories.push({...category, id})
+    
+    localStorage.setItem(KEY, JSON.stringify(newData))
+    this.store.set(newData)
   }
 }
 
