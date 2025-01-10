@@ -15,11 +15,12 @@
 
   onDestroy(() => {
     if(ModalElement){
-      document.querySelector('.main')?.removeChild(ModalElement)
+      if(document.querySelector('.main')?.contains(ModalElement)){
+        document.querySelector('.main')?.removeChild(ModalElement)
+      }
     }
   })
 
-  
 
 </script>
 
