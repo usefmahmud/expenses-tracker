@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 import type { Writable } from "svelte/store";
-import type { Category, Data } from "../utils/types";
+import type { Category, Data, Expense } from "../utils/types";
 import { defaultCategories } from '../utils/db'
 
 const KEY = 'expense-tracker-data'
@@ -26,21 +26,21 @@ class Storage {
     // AFTER DEV STAGE WILL SET A FUNCTION TO AUTO GET OLD DATA
     localStorage.clear()
 
-    localStorage.setItem(KEY, JSON.stringify(this.getData()))
-    this.store = writable(this.getData())
+    localStorage.setItem(KEY, JSON.stringify(this.getData))
+    this.store = writable(this.getData)
   }
 
-  getData(): Data {
+  get getData(): Data {
     const d = localStorage.getItem(KEY)
     return d ? JSON.parse(d) : default_data
   }
 
-  getTheme(): Data['theme'] {
-    return this.getData().theme
+  get getTheme(): Data['theme'] {
+    return this.getData.theme
   }
 
   toggleTheme = () => {
-    const data = this.getData()
+    const data = this.getData
     data.theme = data.theme === 'dark' ? 'light' : 'dark'
     
     localStorage.setItem(KEY, JSON.stringify(data))
@@ -51,9 +51,21 @@ class Storage {
   // Category
   addCategory = (category: Omit<Category, 'id'>) => {
     const id = Date.now()
-    const newData = this.getData()
+    const newData = this.getData
     
     newData.categories.push({...category, id})
+    
+    localStorage.setItem(KEY, JSON.stringify(newData))
+    this.store.set(newData)
+  }
+
+  // Expense
+  addExpene = (expense: Omit<Expense, 'id' | 'date'>, date: Date = new Date()) => {
+    const id = Date.now()
+    const newData = this.getData
+
+    newData.actions.total_expenses += expense.amount    
+    newData.actions.actions.push({...expense, id, date})
     
     localStorage.setItem(KEY, JSON.stringify(newData))
     this.store.set(newData)

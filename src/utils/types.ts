@@ -8,7 +8,6 @@ interface BaseAction {
 
 interface Expense extends BaseAction {
   type: 'expense',
-  description: string,
   category: number
 }
 

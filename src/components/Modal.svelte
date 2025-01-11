@@ -3,7 +3,7 @@
   import { fade } from "svelte/transition"
   import Icon from "./Icon.svelte"
   export let title: string
-  export let handleCloseCategoryModal
+  export let handleCloseModal
 
   let ModalElement: HTMLDivElement
   onMount(() => {
@@ -32,13 +32,12 @@
   tabindex="-1"
   onclick={e => {
     if(e.target === ModalElement){
-      handleCloseCategoryModal()
+      handleCloseModal()
     }
   }}
   onkeydown={e => {
-    console.log(e.key)
     if(e.key === 'Escape'){
-      handleCloseCategoryModal()
+      handleCloseModal()
     }
   }}
 
@@ -54,10 +53,10 @@
           type="button" 
           class="modal__close-btn"
           aria-label="Close"
-          onclick={handleCloseCategoryModal}
+          onclick={handleCloseModal}
           onkeydown={e => {
             if(e.key === 'Enter' || e.key === ' '){
-              handleCloseCategoryModal()
+              handleCloseModal()
             }
           }}
         >
@@ -92,7 +91,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      height: 100%;
+      // height: 100%;
       width: 100%;
       max-height: 700px;
       max-width: 500px;

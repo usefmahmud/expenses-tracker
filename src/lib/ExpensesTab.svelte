@@ -3,8 +3,9 @@
   import Modal from "../components/Modal.svelte";
   import { storage } from "../store/storageManager";
   import { expensesByCategory } from "../utils/helpers";
-  import type { Data } from "../utils/types";
+  import type { Category, Data } from "../utils/types";
   import AddCategory from "./AddCategory.svelte";
+  import AddExpense from "./AddExpense.svelte";
 
   let data: Data | null = null
   let groupedExpenses = []
@@ -18,6 +19,16 @@
   }
   const handleOpenCategoryModal = () => {
     isAddCategoryOpen = true
+  }
+
+  let isAddExpenseOpen: boolean = false
+  let selectedCategoryId: Category['id']
+  const handleCloseExpenseModal = () => {
+    isAddExpenseOpen = false
+  }
+  const handleOpenExpenseModal = (categoryId: Category['id']) => {
+    isAddExpenseOpen = true
+    selectedCategoryId = categoryId
   }
 </script>
 
@@ -36,6 +47,9 @@
         
           onmouseout={e => e.currentTarget.style.backgroundColor = '' }
           onblur={e => e.currentTarget.style.backgroundColor = '' }
+
+          onclick={() => handleOpenExpenseModal(category.id)}
+          onkeydown={(e) => e.key === 'Enter' && handleOpenExpenseModal(category.id)}
         >
           <div 
             class="category__icon" 
@@ -102,7 +116,7 @@
 {#if isAddCategoryOpen}
   <Modal 
     title='ADD CATEGORY'
-    {handleCloseCategoryModal}
+    handleCloseModal={handleCloseCategoryModal}
   >
     <AddCategory 
       {handleCloseCategoryModal}
@@ -110,6 +124,17 @@
   </Modal>
 {/if}
 
+{#if isAddExpenseOpen}
+  <Modal 
+    title='ADD EXPENSE'
+    handleCloseModal={handleCloseExpenseModal}
+  >
+    <AddExpense 
+      {handleCloseExpenseModal}
+      {selectedCategoryId}
+    />
+  </Modal>
+{/if}
 
 <style lang="scss">
   .expenses-tab{
