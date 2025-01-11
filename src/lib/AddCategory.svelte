@@ -13,10 +13,6 @@
     color: defaultCategoryColors[0]
   }
 
-  const handleCategoryTitle = (e: Event) => {
-    categoryData.name = (e.target as HTMLInputElement)?.value ?? ''
-  }
-
   let isTitleFieldActive = false
   const handleTitleFieldActive = (e: FocusEvent) => {
     if(e.type === 'focus'){
