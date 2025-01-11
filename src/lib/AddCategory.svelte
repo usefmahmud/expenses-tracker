@@ -64,7 +64,6 @@
           onblur={handleTitleFieldActive}
           
           bind:value={categoryData.name}
-          onchange={handleCategoryTitle}
         >
       </div>
 
