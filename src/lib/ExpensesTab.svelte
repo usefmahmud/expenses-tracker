@@ -105,7 +105,7 @@
         </div>
         <div class="category__details">
           <div class="category__title">
-            Add
+            Add Category
           </div>
         </div>
       </div>
