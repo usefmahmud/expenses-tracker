@@ -50,9 +50,6 @@ class ExpenseManager {
     const data = this.storage.getItem<Data>(KEY) || default_data
     const newExpense = {...expense, id, date}
 
-    data.expenses.data.push(newExpense)
-    data.expenses.total += newExpense.amount
-
     this.store.update(expenses => ({
       data: [...expenses.data, newExpense],
       total: expenses.total + newExpense.amount
@@ -114,7 +111,6 @@ class CategoryManager {
     const id = Date.now()
     const newCategory = {...category, id}
 
-    data.categories.push(newCategory)
     this.store.update(categories => [...categories, newCategory])
     this.storage.setItem(KEY, data)
   }
