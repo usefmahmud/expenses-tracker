@@ -174,6 +174,10 @@ class Storage {
     this.storage = new LocalStorage()
     this.data = this.storage.getItem<Data>(KEY) || default_data
 
+    // clear previous version of data schema
+    // untill fix versioning issue
+    this.storage.removeItem(KEY)
+
     this.expensesManager = new ExpenseManager(this.storage, this.data.expenses)
     this.categoriesManager = new CategoryManager(this.storage, this.data.categories)
     this.themeManager = new ThemeManager(this.storage, this.data.theme)
