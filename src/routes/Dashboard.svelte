@@ -3,16 +3,18 @@
   import IncomesTab from "../lib/IncomesTab.svelte"
   import ExpensesTab from "../lib/ExpensesTab.svelte"
   import { storage } from "../store/storageManager";
-  import type { Actions } from "../utils/types";
 
   let activeTab: 'expenses' | 'incomes' = 'expenses'
   const setTab = (tab: 'expenses' | 'incomes') => {
     activeTab = tab
   }
 
-  let actions: Actions | null = null
-  const store = storage.store
-  $: actions = $store.actions
+  const expensesStore = storage.expensesManager.expenses
+  // const incomesStore = storage.incomesManager.incomes
+
+  let expenses = $expensesStore
+  $: expenses = $expensesStore
+
 </script>
 
 <div class="dashboard">
@@ -43,9 +45,9 @@
               <span>$</span>
               <span>
                 {
-                  actions.total_expenses === 0 ?
-                  `${actions.total_expenses}.00` :
-                  actions.total_expenses
+                  expenses.total === 0 ?
+                  '0.00'
+                  : expenses.total.toFixed(2)
                 }
               </span>
             </div>
@@ -75,11 +77,7 @@
             <div class="card__value" style="color: #195d5b;">
               <span>$</span>
               <span>
-                {
-                  actions.total_incomes === 0 ?
-                  `${actions.total_incomes}.00` :
-                  actions.total_incomes
-                }
+                0.00
               </span>
             </div>
           </div>

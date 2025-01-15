@@ -1,7 +1,7 @@
 <script lang="ts">
   import Icon from '../components/Icon.svelte';
   import { getGreeting } from '../utils/helpers'
-    import type { Data } from '../utils/types';
+  import type { Data } from '../utils/types'
 
   export let theme: Data['theme'], toggleTheme
 </script>
@@ -13,7 +13,7 @@
   <div class="header__buttons">
     <button 
       class="header__buttons-btn"
-      onclick={toggleTheme}
+      onclick={() => toggleTheme(theme === 'dark' ? 'light' : 'dark')}
     >
       <Icon
         icon={theme === 'dark' ? 'bx bx-sun' : 'bx bx-moon'}

@@ -2,16 +2,18 @@
   import Icon from "../components/Icon.svelte"
   import Modal from "../components/Modal.svelte";
   import { storage } from "../store/storageManager";
-  import { expensesByCategory } from "../utils/helpers";
-  import type { Category, Data } from "../utils/types";
+  import type { Category } from "../utils/types";
   import AddCategory from "./AddCategory.svelte";
   import AddExpense from "./AddExpense.svelte";
 
-  let data: Data | null = null
-  let groupedExpenses = []
-  const store = storage.store
-  $: data = $store
-  $: groupedExpenses = expensesByCategory(data.actions.actions.filter(action => action.type === 'expense'), data.categories)
+  const expensesManager = storage.expensesManager
+  
+  const cateogryStore = storage.categoriesManager.categories
+  const expenseStore = expensesManager.expenses
+
+  let groupedExpenses = expensesManager.expensesByCategory
+  $: $expenseStore, groupedExpenses = expensesManager.expensesByCategory
+  $: console.log(groupedExpenses)
 
   let isAddCategoryOpen: boolean = false
   const handleCloseCategoryModal = () => {
@@ -35,7 +37,7 @@
 <div class="expenses-tab">
   <div class="expenses__cateogires">
 
-    {#each data.categories as category }
+    {#each $cateogryStore as category }
 
       <div class="category__card">
         <div 
@@ -71,9 +73,7 @@
             >
               <span>$</span>
               {
-                groupedExpenses
-                  .find(c => c.id === category.id)
-                  ?.expenses.reduce((prev, curr) => prev + curr.amount, 0)
+                groupedExpenses[category.id] ? groupedExpenses[category.id].total.toFixed(2) : '0.00'
               }
             </div>
           </div>
