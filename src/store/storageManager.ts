@@ -50,10 +50,14 @@ class ExpenseManager {
     const data = this.storage.getItem<Data>(KEY) || default_data
     const newExpense = {...expense, id, date}
 
+    
     this.store.update(expenses => ({
       data: [...expenses.data, newExpense],
       total: expenses.total + newExpense.amount
     }))
+    
+    data.expenses.data.push(newExpense)
+    data.expenses.total += newExpense.amount
     this.storage.setItem(KEY, data)
   }
 
@@ -112,6 +116,8 @@ class CategoryManager {
     const newCategory = {...category, id}
 
     this.store.update(categories => [...categories, newCategory])
+
+    data.categories.push(newCategory)
     this.storage.setItem(KEY, data)
   }
 
@@ -170,9 +176,9 @@ class Storage {
     this.storage = new LocalStorage()
     this.data = this.storage.getItem<Data>(KEY) || default_data
 
-    // clear previous version of data schema
-    // untill fix versioning issue
-    this.storage.removeItem(KEY)
+    // // clear previous version of data schema
+    // // untill fix versioning issue
+    // this.storage.removeItem(KEY)
 
     this.expensesManager = new ExpenseManager(this.storage, this.data.expenses)
     this.categoriesManager = new CategoryManager(this.storage, this.data.categories)
