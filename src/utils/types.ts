@@ -32,19 +32,20 @@ interface Category {
   icon: string,
 }
 
-interface Actions {
-  total_incomes: number,
-  total_expenses: number,
-  actions: Action[]
-}
-
 interface Data {
   personal_info: {
     name: string,
     avatar: string
   },
   theme: 'light' | 'dark',
-  actions: Actions,
+  expenses: {
+    data: Expense[],
+    total: number
+  },
+  incomes: {
+    data: Income[],
+    total: number
+  },
   categories: Category[]
 }
 
@@ -54,4 +55,10 @@ interface NavRouteType {
   icon: string
 }
 
-export type { Expense, Income, Action, Category, NavRouteType, Data, Actions, CategoryColor}
+interface LocalStorageInterface {
+  getItem<T>(key: string): T | null
+  setItem<T>(key: string, value: T): void
+  removeItem(key: string): void
+}
+
+export type { Expense, Income, Action, Category, NavRouteType, Data, CategoryColor, LocalStorageInterface }

@@ -8,24 +8,21 @@
 
   import 'boxicons/css/boxicons.min.css'
   import { storage } from "./store/storageManager";
-  import type { Data } from "./utils/types";
 
-  let appData: Data | null = null
-  const store = storage.store
-  $: appData = $store
+  const themeManager = storage.themeManager
+  const themeStore = storage.themeManager.theme
 
-  $: console.log(appData)
 </script>
 
 <Router>
-  <div class="main {appData.theme === 'dark' ? 'dark-mode' : ''}">
+  <div class="main {$themeStore === 'dark' ? 'dark-mode' : ''}">
     <aside class="side">
       <Navbar />
     </aside>
     <div class="container">
       <Header 
-      theme={appData.theme}
-      toggleTheme={storage.toggleTheme}
+        theme={$themeStore}
+        toggleTheme={(x: 'dark' | 'light') => themeManager.setTheme(x)}
       />
       <main>
         <Route path="/" component={Dashboard} />

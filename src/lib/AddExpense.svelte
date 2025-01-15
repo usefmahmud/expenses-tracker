@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import Icon from "../components/Icon.svelte";
+  import Icon from "../components/Icon.svelte";
   import { storage } from "../store/storageManager"
   import { defaultCategories } from "../utils/db";
   import type { Category, Expense } from "../utils/types";
@@ -9,8 +8,11 @@
   export let handleCloseExpenseModal
   export let selectedCategoryId
 
-  let selectedCategory: Category = storage.getData.categories
-                                        .find(category => category.id === selectedCategoryId) ?? defaultCategories[0]
+  const expensesManager = storage.expensesManager
+  const categoriesManager = storage.categoriesManager
+
+  const selectedCategory = categoriesManager.getCategoryById(selectedCategoryId) ?? defaultCategories[0]
+  
 
   const expenseData: Omit<Expense, 'id' | 'date'> = {
     type: 'expense',
@@ -61,7 +63,7 @@
       return
     }
 
-    storage.addExpene(expenseData)
+    expensesManager.addExpense(expenseData)
     toast.success('expense added successfully')
     handleCloseExpenseModal()
   } 
@@ -88,7 +90,8 @@
 
       <div class="form__field">
         <span 
-          class="field__title {isTitleFieldActive && 'field__title--active'}"
+          class="field__title"
+          class:field__title--active={isTitleFieldActive}
         >Title</span>
         <input 
           type="text" 
@@ -106,8 +109,8 @@
         class="form__buttons-category"
         role="button"
         tabindex="0"
-        onmouseover={e => e.currentTarget.style.backgroundColor = selectedCategory.color.hoverBgColor }
-        onfocus={e => e.currentTarget.style.backgroundColor = selectedCategory.color.hoverBgColor }
+        onmouseover={e => e.currentTarget.style.backgroundColor = selectedCategory?.color.hoverBgColor }
+        onfocus={e => e.currentTarget.style.backgroundColor = selectedCategory?.color.hoverBgColor }
       
         onmouseout={e => e.currentTarget.style.backgroundColor = '' }
         onblur={e => e.currentTarget.style.backgroundColor = '' }

@@ -7,6 +7,8 @@
   
   export let handleCloseCategoryModal
 
+  const categoryManager = storage.categoriesManager
+
   const categoryData: Omit<Category, 'id'> = {
     name: '',
     icon: defaultCategoryIcons[0],
@@ -34,13 +36,11 @@
 
   const handleAddCategory = () => {
     if(categoryData.name.replaceAll(' ', '') === ''){
-      toast.error("category name cannot be empty", {
-        duration: 2500
-      })
+      toast.error("category name cannot be empty")
       return
     }
 
-    storage.addCategory(categoryData)
+    categoryManager.addCategory(categoryData)
     toast.success('category added successfully')
     handleCloseCategoryModal()
   }
@@ -51,7 +51,8 @@
     <div class="form__input-data">
       <div class="form__field">
         <span 
-          class="field__title {isTitleFieldActive && 'field__title--active'}"
+          class="field__title"
+          class:field__title--active={isTitleFieldActive}  
         >Title</span>
         <input 
           type="text" 
@@ -70,7 +71,8 @@
               <div 
                 role="button"
                 tabindex="0"
-                class="icon {categoryData.icon === categoryIcon ? 'icon--selected' : ''}"
+                class="icon"
+                class:icon--selected={categoryData.icon === categoryIcon}
 
                 onclick={() => handleSelectedIcon(categoryIcon)}
                 onkeydown={(e) => e.key === 'Enter' && handleSelectedIcon(categoryIcon)}
