@@ -10,10 +10,12 @@
   }
 
   const expensesStore = storage.expensesManager.expenses
-  // const incomesStore = storage.incomesManager.incomes
+  const incomesStore = storage.incomesManager.incomes
 
   let expenses = $expensesStore
+  let incomes = $incomesStore
   $: expenses = $expensesStore
+  $: incomes = $incomesStore
 
 </script>
 
@@ -77,7 +79,11 @@
             <div class="card__value" style="color: #195d5b;">
               <span>$</span>
               <span>
-                0.00
+                {
+                  incomes.total === 0 ?
+                  '0.00'
+                  : incomes.total.toFixed(2)
+                }
               </span>
             </div>
           </div>

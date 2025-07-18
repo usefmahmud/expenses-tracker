@@ -1,9 +1,9 @@
 <script lang="ts">
     import { link, links, Router, useLocation } from "svelte-routing"
     import { type NavRouteType } from '../utils/types'
-
-    import avatar from '../assets/avatars/avatar-1.svg'
+    import { storage } from "../store/storageManager"
     import Icon from "../components/Icon.svelte";
+    import { writable } from "svelte/store";
 
     const location = useLocation()
 
@@ -19,15 +19,23 @@
             icon: 'bx bxs-cog'
         }
     ]
+
+    // Create a reactive store for personal info
+    const personalInfoStore = writable(storage.personalInfoManager.getPersonalInfo())
+    
+    // Update the store periodically or when needed
+    setInterval(() => {
+        personalInfoStore.set(storage.personalInfoManager.getPersonalInfo())
+    }, 1000)
 </script>
 
 <nav>
     <div class="user-info">
         <div class="user-info__avatar">
-            <img src={avatar} alt="user avatar">
+            <img src="/src/assets/avatars/{$personalInfoStore.avatar}" alt="user avatar">
         </div>
         <div class="user-info__name">
-            Yousef Mahmoud
+            {$personalInfoStore.name}
         </div>
     </div>
 
