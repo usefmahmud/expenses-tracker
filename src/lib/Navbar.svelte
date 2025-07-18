@@ -2,6 +2,7 @@
     import { link, links, Router, useLocation } from "svelte-routing"
     import { type NavRouteType } from '../utils/types'
     import { storage } from "../store/storageManager"
+    import { getAvatarUrl } from "../utils/avatars"
     import Icon from "../components/Icon.svelte";
     import { writable } from "svelte/store";
 
@@ -12,6 +13,11 @@
             name: 'Dashboard',
             path: '/',
             icon: 'bx bxs-dashboard'
+        },
+        {
+            name: 'Expenses History',
+            path: '/expenses-history',
+            icon: 'bx bx-history'
         },
         {
             name: 'Settings',

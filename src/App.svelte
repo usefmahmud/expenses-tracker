@@ -2,6 +2,7 @@
   import { Router, Route } from "svelte-routing"
   import Dashboard from "./routes/Dashboard.svelte"
   import Settings from "./routes/Settings.svelte"
+  import ExpensesHistory from "./routes/ExpensesHistory.svelte"
   import Navbar from "./lib/Navbar.svelte"
   import Header from "./lib/Header.svelte";
   import {Toaster} from 'svelte-french-toast'
@@ -26,6 +27,7 @@
       />
       <main>
         <Route path="/" component={Dashboard} />
+        <Route path="/expenses-history" component={ExpensesHistory} />
         <Route path="/settings" component={Settings} />
       </main>
     </div>

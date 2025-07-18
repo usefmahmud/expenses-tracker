@@ -2,6 +2,7 @@
   import Icon from "../components/Icon.svelte";
   import { storage } from "../store/storageManager";
   import { toast } from 'svelte-french-toast';
+  import { availableAvatars, getAvatarUrl } from "../utils/avatars";
 
   const { personalInfoManager, themeManager, expensesManager, incomesManager, categoriesManager } = storage;
   const themeStore = themeManager.theme;
@@ -13,12 +14,8 @@
   let newName = personalInfo.name;
   let selectedAvatar = personalInfo.avatar;
 
-  // Available avatars
-  const avatars = [
-    'avatar-1.svg', 'avatar-2.svg', 'avatar-3.svg', 'avatar-4.svg',
-    'avatar-5.svg', 'avatar-6.svg', 'avatar-7.svg', 'avatar-8.svg',
-    'avatar-9.svg', 'avatar-10.svg', 'avatar-11.svg', 'avatar-12.svg'
-  ];
+  // Available avatars from the utility
+  const avatars = availableAvatars;
 
   const handleSavePersonalInfo = () => {
     if (newName.trim() === '') {
@@ -80,7 +77,7 @@
                 class:avatar-option--selected={avatar === selectedAvatar}
                 onclick={() => selectedAvatar = avatar}
               >
-                <img src="/src/assets/avatars/{avatar}" alt="Avatar option" />
+                <img src={getAvatarUrl(avatar)} alt="Avatar option" />
               </button>
             {/each}
           </div>
