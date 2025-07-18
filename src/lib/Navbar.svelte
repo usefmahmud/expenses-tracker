@@ -38,7 +38,7 @@
 <nav>
     <div class="user-info">
         <div class="user-info__avatar">
-            <img src="/src/assets/avatars/{$personalInfoStore.avatar}" alt="user avatar">
+            <img src={getAvatarUrl($personalInfoStore.avatar)} alt="user avatar">
         </div>
         <div class="user-info__name">
             {$personalInfoStore.name}
